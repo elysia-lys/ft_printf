@@ -1,0 +1,5 @@
+.clangd
+*.out
+*.a
+*.o
+test*.c
