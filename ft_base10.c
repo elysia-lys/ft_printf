@@ -16,6 +16,7 @@ int	ft_decimal(int n)
 {
 	char	c;
 	int	count;
+	int	current;
 
 	count = 0;
 	if (n == -2147483648)
@@ -28,7 +29,12 @@ int	ft_decimal(int n)
 		n = -n;
 	}
 	if (n >= 10)
-		count += ft_decimal(n / 10);
+	{
+		current = ft_decimal(n / 10);
+		if (current == -1)
+			return (-1);
+		count += current;
+	}
 	c = (n % 10) + '0';
 	if (write(1, &c, 1) == -1)
 		return (-1);
