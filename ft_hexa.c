@@ -1,34 +1,47 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_base10.c                                        :+:      :+:    :+:   */
+/*   ft_hexa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yeliew <yeliew@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/08/31 00:08:51 by yeliew            #+#    #+#             */
-/*   Updated: 2026/08/31 00:16:30 by yeliew           ###   ########.fr       */
+/*   Created: 2026/09/01 15:43:38 by yeliew            #+#    #+#             */
+/*   Updated: 2026/09/01 16:04:31 by yeliew           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static int	count_digits(int n)
+static int	count_hex(unsigned int n)
 {
 	int	count;
 
 	count = 0;
-	if (n <= 0)
-		count++;
+	if (n == 0)
+		return (1);
 	while (n)
 	{
 		count++;
-		n /= 10;
+		n /= 16;
 	}
 	return (count);
 }
 
-int	ft_decimal(int d)
+static void	ft_puthex(unsigned int n, char convert)
 {
-	ft_putnbr_fd(d, 1);
-	return (count_digits(d));
+	char	*base;
+
+	if (convert == 'x')
+		base = "0123456789abcdef";
+	else
+		base = "0123456789ABCDEF";
+	if (n >= 16)
+		ft_puthex(n / 16, convert);
+	ft_putchar_fd(base[n % 16], 1);
+}
+
+int	ft_hex(unsigned int n, char convert)
+{
+	ft_puthex(n, convert);
+	return (count_hex(n));
 }

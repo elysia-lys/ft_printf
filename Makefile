@@ -7,7 +7,10 @@ LIBFT = libft/libft.a
 
 SRC = ft_printf.c \
       ft_char_string.c \
-      ft_base10.c
+      ft_base10.c \
+      ft_unsigned_base10.c \
+      ft_hexa.c \
+      ft_ptr.c
 
 OBJ = $(SRC:.c=.o)
 all : $(NAME)

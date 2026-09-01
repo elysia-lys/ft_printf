@@ -1,26 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_unsigned_base10.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yeliew <yeliew@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/08/30 21:49:26 by yeliew            #+#    #+#             */
-/*   Updated: 2026/08/30 22:02:08 by yeliew           ###   ########.fr       */
+/*   Created: 2026/09/01 15:19:30 by yeliew            #+#    #+#             */
+/*   Updated: 2026/09/01 15:35:43 by yeliew           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#include "ft_printf.h"
 
-# include <stdarg.h>
-# include "libft/libft.h"
+static int	count_digit(unsigned int n)
+{
+	int	count;
 
-int	ft_printf(const char *format_string, ...);
-int	ft_printstr(const char *s);
-int	ft_printchar(char c);
-int	ft_decimal(int d);
-int	ft_unsigned_decimal(unsigned int n);
-int	ft_hex(unsigned int n, char convert);
-int	ft_ptr(void *ptr);
-#endif
+	count = 0;
+	if (n == 0)
+		return (1);
+	while (n)
+	{
+		count++;
+		n /= 10;
+	}
+	return (count);
+}
+
+static void	ft_putnbr_unsigned(unsigned int n)
+{
+	if (n >= 10)
+		ft_putnbr_unsigned(n / 10);
+	ft_putchar_fd((n % 10) + '0', 1);
+}
+
+int	ft_unsigned_decimal(unsigned int n)
+{
+	ft_putnbr_unsigned(n);
+	return (count_digit(n));
+}

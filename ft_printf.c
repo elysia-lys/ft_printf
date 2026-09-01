@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                         :+:      :+:    :+:   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yeliew <yeliew@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -11,24 +11,6 @@
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-/*
-int ft_convert_char(va_list args);
-int ft_convert_str(va_list args);
-
-static int	ft_convert(va_list args, char convert)
-{
-	int	size;
-
-	char converts_char[]= "cs%";
-	int  (*converts[])(va_list) = {
-		ft_convert_char,
-		ft_convert_str
-	};
-
-	return (converts[ft_strchr(converts_char, convert)](args));
-}
-*/
 
 static int	ft_convert(va_list args, char convert)
 {
@@ -40,18 +22,30 @@ static int	ft_convert(va_list args, char convert)
 		size = ft_printstr(va_arg(args, char *));
 	else if (convert == '%')
 		size = write(1, "%", 1);
+	else if (convert == 'd' || convert == 'i')
+		size = ft_decimal(va_arg(args, int));
+	else if (convert == 'u')
+		size = ft_unsigned_decimal(va_arg(args, unsigned int));
+	else if (convert == 'x')
+		size = ft_hex(va_arg(args, unsigned int), 'x');
+	else if (convert == 'X')
+		size = ft_hex(va_arg(args, unsigned int), 'X');
+	else if (convert == 'p')
+		size = ft_ptr(va_arg(args, void *));
 	return (size);
 }
 
 int	ft_printf(const char *format_string, ...)
 {
 	va_list	args;
-	int	size;
-	int	write_size;
+	int		size;
+	int		write_size;
 
 	size = 0;
+	if (!format_string)
+		return (-1);
 	va_start(args, format_string);
-	while(*format_string)
+	while (*format_string)
 	{
 		if (*format_string == '%')
 			write_size = ft_convert(args, *(++format_string));
