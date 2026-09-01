@@ -15,15 +15,15 @@
 int	ft_decimal(int n)
 {
 	char	c;
-	int	count;
-	int	current;
+	int		count;
+	int		current;
 
 	count = 0;
 	if (n == -2147483648)
 		return (write (1, "-2147483648", 11));
 	if (n < 0)
 	{
-		if (write ( 1, "-", 1) == -1)
+		if (write (1, "-", 1) == -1)
 			return (-1);
 		count++;
 		n = -n;

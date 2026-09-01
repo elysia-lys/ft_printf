@@ -15,7 +15,7 @@
 int	ft_hex(unsigned long n, char convert)
 {
 	char	*base;
-	int	count;
+	int		count;
 
 	count = 0;
 	if (convert == 'x')

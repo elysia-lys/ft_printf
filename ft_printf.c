@@ -12,6 +12,15 @@
 
 #include "ft_printf.h"
 
+static int	ft_else(char convert)
+{
+	if ((write(1, "%", 1) == -1))
+		return (-1);
+	if ((write(1, &convert, 1) == -1))
+		return (-1);
+	return (2);
+}
+
 static int	ft_convert(va_list args, char convert)
 {
 	int	size;
@@ -35,10 +44,7 @@ static int	ft_convert(va_list args, char convert)
 	else if (convert == 0)
 		return (0);
 	else
-	{
-		size = write(1, "%", 1);
-		size = write(1, &convert, 1);
-	}
+		size = ft_else(convert);
 	return (size);
 }
 
