@@ -15,7 +15,7 @@
 int	ft_unsigned_decimal(unsigned int n)
 {
 	char	c;
-	int	count;
+	int		count;
 
 	count = 0;
 	if (n >= 10)
