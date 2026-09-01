@@ -12,23 +12,25 @@
 
 #include "ft_printf.h"
 
-static int	count_digits(int n)
+int	ft_decimal(int n)
 {
+	char	c;
 	int	count;
 
 	count = 0;
-	if (n <= 0)
-		count++;
-	while (n)
+	if (n == -2147483648)
+		return (write (1, "-2147483648", 11));
+	if (n < 0)
 	{
+		if (write ( 1, "-", 1) == -1)
+			return (-1);
 		count++;
-		n /= 10;
+		n = -n;
 	}
-	return (count);
-}
-
-int	ft_decimal(int d)
-{
-	ft_putnbr_fd(d, 1);
-	return (count_digits(d));
+	if (n >= 10)
+		count += ft_decimal(n / 10);
+	c = (n % 10) + '0';
+	if (write(1, &c, 1) == -1)
+		return (-1);
+	return (count + 1);
 }

@@ -12,30 +12,18 @@
 
 #include "ft_printf.h"
 
-static int	count_digit(unsigned int n)
+int	ft_unsigned_decimal(unsigned int n)
 {
+	char	c;
 	int	count;
 
 	count = 0;
-	if (n == 0)
-		return (1);
-	while (n)
-	{
-		count++;
-		n /= 10;
-	}
-	return (count);
-}
-
-static void	ft_putnbr_unsigned(unsigned int n)
-{
 	if (n >= 10)
-		ft_putnbr_unsigned(n / 10);
-	ft_putchar_fd((n % 10) + '0', 1);
-}
-
-int	ft_unsigned_decimal(unsigned int n)
-{
-	ft_putnbr_unsigned(n);
-	return (count_digit(n));
+		count = ft_unsigned_decimal(n / 10);
+	if (count == -1)
+		return (-1);
+	c = (n % 10) + '0';
+	if (write(1, &c, 1) == -1)
+		return (-1);
+	return (count + 1);
 }

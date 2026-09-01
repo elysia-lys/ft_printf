@@ -32,6 +32,13 @@ static int	ft_convert(va_list args, char convert)
 		size = ft_hex(va_arg(args, unsigned int), 'X');
 	else if (convert == 'p')
 		size = ft_ptr(va_arg(args, void *));
+	else if (convert == 0)
+		return (0);
+	else
+	{
+		size = write(1, "%", 1);
+		size = write(1, &convert, 1);
+	}
 	return (size);
 }
 
