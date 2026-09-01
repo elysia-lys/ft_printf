@@ -21,6 +21,6 @@ int	ft_printstr(const char *s);
 int	ft_printchar(char c);
 int	ft_decimal(int d);
 int	ft_unsigned_decimal(unsigned int n);
-int	ft_hex(unsigned int n, char convert);
+int	ft_hex(unsigned long n, char convert);
 int	ft_ptr(void *ptr);
 #endif
