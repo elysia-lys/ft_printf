@@ -42,7 +42,7 @@ static int	ft_convert(va_list args, char convert)
 	else if (convert == 'p')
 		size = ft_ptr(va_arg(args, void *));
 	else if (convert == 0)
-		return (0);
+		return (-1);
 	else
 		size = ft_else(convert);
 	return (size);
